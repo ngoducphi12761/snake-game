@@ -12,6 +12,7 @@
             height: 200px;
             margin-left: 50px;
             position: relative;
+            background-color: #ccc;
         }
 
         .dot {
@@ -49,19 +50,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         createGrid(50);
+        let flag = 'true';
         let blockSize = 10;
         let areaWidth = 300;
         let areaHeight = 200;
         let board = $('#the-border');
         let dir = 'top';
+        $(function(){
+            placeRandomFood()
+        })
+    
         document.addEventListener('keydown', function (event) {
             switch (event.key) {
                 case 'ArrowUp':
                     if (dir != 'top')
-                        dir = 'buttom';
+                        dir = 'bottom';
                     break;
                 case 'ArrowDown':
-                    if (dir == 'buttom')
+                    if (dir == 'bottom')
                         break;
                     dir = 'top';
                     break;
@@ -83,6 +89,10 @@
                 $('body').append(button);
             }
             if (isSnakeTouchingFood()) {
+                // document.querySelector('#audio').play();
+                let audio = $('#audio')[0];
+                audio.playbackRate =2;
+                audio.play();
                 placeRandomFood();
             }
         }
@@ -108,6 +118,7 @@
             $('#food').css({ top: ypos, left: xpos });
         }
         function startOver() {
+          
             $('document').ready(
                 location.reload()
             );
@@ -117,6 +128,7 @@
             move, 300
         );
         function move() {
+
             let snake = $('.dot');
             let pos = snake.position();
             if (dir == 'left') {
@@ -125,7 +137,7 @@
             if (dir == 'top') {
                 snake.css({ top: pos[dir] + blockSize });
             }
-            if (dir == 'buttom') {
+            if (dir == 'bottom') {
                 snake.css({ top: pos['top'] - blockSize });
             }
             if (dir == 'right') {
@@ -161,6 +173,7 @@
     <div id="the-border">
         <div class="dot"></div>
         <div id="food"></div>
+        <audio id="audio" src="snakeSoundEffect.m4a"></audio>
         <div class></div>
     </div>
 </body>
