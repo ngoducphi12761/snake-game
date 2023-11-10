@@ -16,13 +16,15 @@
         }
 
         .dot {
-            border: 1px solid black;
+            /* border: 1px solid black; */
             width: 10px;
             height: 10px;
-            background-color: black;
+            /* background-color: black; */
             position: absolute;
             top: 80px;
             left: 140px;
+            background-size: contain;
+            background-image: url('head.png');
         }
 
         #food {
@@ -125,7 +127,7 @@
         }
 
         interval_id = setInterval(
-            move, 300
+            move, 100
         );
         function move() {
 
@@ -173,7 +175,7 @@
     <div id="the-border">
         <div class="dot"></div>
         <div id="food"></div>
-        <audio id="audio" src="snakeSoundEffect.m4a"></audio>
+        <audio id="audio" src="bite.mp3"></audio>
         <div class></div>
     </div>
 </body>
